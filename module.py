@@ -36,11 +36,12 @@ def set_type( **kwargs ):                            # <== decolator
 # test
 if __name__ == "__main__":
     @set_type( **{ 'x' : int, 'y' : int, 'string' : str } )
-    def testfunc( x, y = 0, string = "" ):
+    def testfunc( x, y = 0, string = "", **kwargs ):
         print "x = " + str(x) + ", y = " + str(y) + ", string = " + string
+        print kwargs
 
     # ok
-    testfunc( 3 )
+    testfunc( 3, z = 3 )
     testfunc( 3, 4, 'b' )
     testfunc( 2, y = 9, string = '2' )
     testfunc( 33, string = 'sldkfjlskdfjlksdjflskdjf' )
