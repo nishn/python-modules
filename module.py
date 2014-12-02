@@ -11,12 +11,13 @@ def set_type( **kwargs ):                            # <== decolator
             import inspect                           #     and substituted to 'func'
 
             # get argument list of func
-            args     = inspect.getargspec( func ).args
-            tmp_args = func_args + inspect.getargspec( func ).defaults
+            args       = inspect.getargspec( func ).args
+            defaults   = inspect.getargspec( func ).defaults
+            func_args += defaults if defaults != None else ()
 
             # create complete dictionary of kwargs
-            for i in range( min(len(tmp_args), len(args)) - len(func_kwargs.keys())):
-                func_kwargs[args[i]] = tmp_args[i]
+            for i in range( min(len(func_args), len(args)) - len(func_kwargs.keys())):
+                func_kwargs[args[i]] = func_args[i]
             
             # check arguments type
             for name in kwargs.keys():               # <== check list
@@ -46,7 +47,16 @@ if __name__ == "__main__":
     testfunc( 2, y = 9, string = '2' )
     testfunc( 33, string = 'hogehoge' )
     testfunc( 2, 6, string = 'abc' )
+
+    @set_type( **{ 'x' : int } )
+    def p( x ):
+        print x + 1
+
+    p( 1 )
     
     # error
 #    testfunc( 'a' )
 #    testfunc( x = 's', y = 3, string = 3 )
+
+
+
