@@ -18,9 +18,9 @@ except:
                  'nbins'           : int,
                  'y2lab'           : str,
                  'with_cumulative' : bool  } )
-def histgram( data, outfilename = 'hist.png', nbins = 10, y2lab = 'Cumulative Curve', with_cumulative = True, **kwargs ):
+def norm_hist( data, outfilename = 'hist.png', nbins = 10, y2lab = 'Cumulative Curve', with_cumulative = True, **kwargs ):
 
-    histdata = plt.hist( data, nbins )
+    histdata = plt.hist( data, nbins, **kwargs )
     # clear figure buffer
     plt.clf()
 
@@ -60,3 +60,4 @@ def histgram( data, outfilename = 'hist.png', nbins = 10, y2lab = 'Cumulative Cu
     plt.savefig( outfilename )
     plt.clf()
     
+def norm_cumu
